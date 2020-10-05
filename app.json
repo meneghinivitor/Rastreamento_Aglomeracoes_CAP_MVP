@@ -1,0 +1,12 @@
+{
+  "name": "tccvitor",
+  "displayName": "tccvitor",
+  "expo": {
+    "name": "tccvitor",
+    "slug": "tccvitor",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

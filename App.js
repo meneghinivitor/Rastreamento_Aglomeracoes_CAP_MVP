@@ -1,21 +1,82 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from './components/login';
+import Signup from './components/signup';
+import Dashboard from './components/dashboard';
+import Main from './components/main';
+import Boletim from './components/boletim';
+import Report from './components/report';
+import Rastrear from './components/rastrear';
+import Protocol from './components/protocol';
+import Funciona from './components/funciona';
+import Location from './components/location';
+import Foto from './components/foto';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+const Stack = createStackNavigator();
+
+const App = () => {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen
+          name="Funciona"
+          component={Funciona}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Location"
+          component={Location}
+          options={{headerShown: false}}
+        />
+          <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Boletim"
+          component={Boletim}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Protocol"
+          component={Protocol}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Report"
+          component={Report}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Rastrear"
+          component={Rastrear}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Foto"
+          component={Foto}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

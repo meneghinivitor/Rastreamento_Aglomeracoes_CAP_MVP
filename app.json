@@ -2,11 +2,28 @@
   "name": "tccvitor",
   "displayName": "tccvitor",
   "expo": {
-    "name": "tccvitor",
-    "slug": "tccvitor",
+    "android": {
+      "package": "com.mypackage.coolapp",
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.mypackage.coolapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "name": "tccvitoratualizado",
+    "slug": "tccvitoratualizado",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/img/icon.png",
+    "splash": {
+      "image": "./src/img/splash.png",
+      "resizeMode": "cover",
+      "backgroundcolor": "#000"
+    },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": ""
   }
 }

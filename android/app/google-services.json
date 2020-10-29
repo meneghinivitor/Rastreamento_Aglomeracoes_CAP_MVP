@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "212609824178",
+    "firebase_url": "https://coronavirus-4cf01.firebaseio.com",
+    "project_id": "coronavirus-4cf01",
+    "storage_bucket": "coronavirus-4cf01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212609824178:android:955e401b24d140ba46e0ab",
+        "android_client_info": {
+          "package_name": "com.tccvitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212609824178-pbe1i47let56vtdp7pa49ffqf2lo5ea9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tccvitor",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "212609824178-g02gmen7kinkcq5bt443m6mu0cnr85pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARi59sXYnYlQmACh6bu4BDokjQ2iLKif8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212609824178-g02gmen7kinkcq5bt443m6mu0cnr85pk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "212609824178-0nan8up216t8v6gj9v2366s40e5mk24d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ufsj.covid"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Loading from './components/loading';
 import Login from './components/login';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
@@ -12,6 +13,7 @@ import Protocol from './components/protocol';
 import Funciona from './components/funciona';
 import Location from './components/location';
 import Foto from './components/foto';
+import Noticia from './components/noticia';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +74,11 @@ const App = () => {
         <Stack.Screen
           name="Foto"
           component={Foto}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Noticia"
+          component={Noticia}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -9,6 +9,16 @@ import {
 import firebase from '../database/firebase';
 
 export default class Dashboard extends Component {
+  
+  state = { user: {} };
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        this.setState({user: user});
+      }
+    })
+  }
+
   location = () => {
     this.props.navigation.navigate('Location')
   }

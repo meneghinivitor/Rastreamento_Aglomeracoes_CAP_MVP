@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ActivityIndicator } from 'react-native';
 import firebase from '../database/firebase';
-import * as Google from 'expo-google-app-auth';
-import * as GoogleSignIn from 'expo-google-sign-in';
+import Expo from 'expo';
+import * as GoogleSignIn from 'expo-google-sign-in'
 
 export default class Signup extends Component {
   
@@ -10,75 +10,85 @@ export default class Signup extends Component {
     super(props);
     this.state = { 
       displayName: '',
+      name: '',
+      signedIn: false,
       matricula: '',
       email: '', 
       password: '',
       isLoading: false,
-      user: null
+      user: null,
+      errorMessage: ''
+    }
+  }
+
+  onLoginSuccess() {
+    this.props.navigation.navigate('Dashboard');
+  }
+  onLoginFailure(errorMessage) {
+    this.setState({ error: errorMessage, isLoading: false });
+  }
+  renderLoading() {
+    if (this.state.loading) {
+      return (
+        <View>
+          <ActivityIndicator size={'large'} />
+        </View>
+      );
     }
   }
   
+async signInWithGoogle() {
+    try {
+      await GoogleSignIn.askForPlayServicesAsync();
+      const { type, user } = await GoogleSignIn.signInAsync();
+      if (type === 'success') {
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        const credential = firebase.auth.GoogleAuthProvider.credential(user.auth.idToken, user.auth.accessToken,);
+        const googleProfileData = await firebase.auth().signInWithCredential(credential);
+        this.onLoginSuccess.bind(this);
+      }
+    } catch ({ message }) {
+      alert('login: Error:' + message);
+    }
+  }
+
  signInWithGoogleAsync = async () => {
     try {
-      const result = await Google.logInAsync({
-        behavior: 'web',
+      const result = await Expo.Google.logInAsync({
+      
         androidClientId: 212609824178-pbe1i47let56vtdp7pa49ffqf2lo5ea9.apps.googleusercontent.com,
         iosClientId: 212609824178-rommfgrpedjepi2evvgj2bg2lnm42phq.apps.googleusercontent.com,
         scopes: ['profile', 'email'],
       });
   
       if (result.type === 'success') {
+        this.setState({
+          signedIn: true,
+          name: result.user.name,
+        })
+        Alert.alert(
+          'Logged in!',
+          `Olá ${result.user.name}! \n  ${JSON.stringify(result.user)}`,
+        );
         return result.accessToken;
       } else {
+        Alert.alert(
+          'Cancelled!',
+          'Login was cancelled!',
+        );
+        console.log("cancelled")
         return { cancelled: true };
       }
     } catch (e) {
+      Alert.alert(
+        'Oops!',
+        'Login failed!',
+      );
+      console.log("error", e)
       return { error: true };
     }
   }
-  componentDidMount() {
-    this.initAsync();
-  }
-
-  initAsync = async () => {
-    await GoogleSignIn.initAsync({
-      behavior: 'web',
-      androidClientId: 212609824178-pbe1i47let56vtdp7pa49ffqf2lo5ea9.apps.googleusercontent.com,
-      iosClientId: 212609824178-rommfgrpedjepi2evvgj2bg2lnm42phq.apps.googleusercontent.com,
-    });
-    this._syncUserWithStateAsync();
-  };
-
-  _syncUserWithStateAsync = async () => {
-    const user = await GoogleSignIn.signInSilentlyAsync();
-    this.setState({ user });
-    this.props.navigation.navigate('Dashboard')
-  };
-
-  signOutAsync = async () => {
-    await GoogleSignIn.signOutAsync();
-    this.setState({ user: null });
-  };
-
-  signInAsync = async () => {
-    try {
-      await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();
-      if (type === 'success') {
-        this._syncUserWithStateAsync();
-      }
-    } catch ({ message }) {
-      alert('login: Error:' + message);
-    }
-  };
-
-  onPress = () => {
-    if (this.state.user) {
-      this.signOutAsync();
-    } else {
-      this.signInAsync();
-    }
-  };
+  
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
@@ -171,7 +181,7 @@ export default class Signup extends Component {
         <View style={{marginTop:15}}>
         <Button
         title= "Entrar com conta Google"
-        onPress={() => this.onPress()}/>
+        onPress={() => this.signInWithGoogle()}/>
         </View>          
         <Text 
           style={styles.loginText}

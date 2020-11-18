@@ -58,7 +58,7 @@
     
    <!-- Add this line to enable backgound messaging services -->
    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService"/>
-    <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@meneghinivitor/tccvitoratualizado" />
+    <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@meneghinivitor/rastreamento-aglomeracoes-cap" />
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="39.0.0" />
         <meta-data
         android:name="com.google.android.geo.API_KEY"

@@ -11,6 +11,8 @@ export default class Location extends Component  {
       where: {lat:null, lng:null},
       error: null,
     }
+    var db = firebase.firestore();
+    this.ref = db.collection('Localizações').doc('Usuário: ' + this.state.displayName);
  }
  
  componentDidMount(){
@@ -25,7 +27,15 @@ export default class Location extends Component  {
     geoOptions);
  }
  geoSuccess = (position) => {
+  var FieldValue = firebase.firestore.FieldValue;
+  this.ref.set({
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,})
+      this.setState({
+        text: ''
+      })
   firebase.database().ref('Usuários/'+ this.state.displayName ).update({
+    
     latitude: position.coords.latitude,
     longitude: position.coords.longitude,
   }, function(error) {

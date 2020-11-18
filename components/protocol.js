@@ -2,47 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, SafeAreaView, Linking, View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
-import firebase from '../database/firebase';
-import * as Permissions from 'expo-permissions';
-import { Notifications } from 'expo';
 
 export default class Protocol extends Component  {
-  constructor(props){
-    super(props);
-    this.state = {
-      displayName: firebase.auth().currentUser.displayName,
-      ready: false,
-      where: {lat:null, lng:null},
-      error: null,
-    }
- }
- componentDidMount = async () => {
-  const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
-  let finalStatus = existingStatus;
-
-  if (existingStatus !== 'granted') {
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    finalStatus = status;
-  }
-
-  if (finalStatus !== 'granted') {
-    return;
-  }
-
-  let token = await Notifications.getExpoPushTokenAsync();
-  console.log( token );
-  firebase.database().ref('Usuários/'+ this.state.displayName ).update({
-    token: token,
-  }, function(error) {
-    if (error) {
-      // The write failed...
-    } else {
-      // Data saved successfully!
-    }
-  });
-}
+  
   render() {
    return (
      <SafeAreaView style={styles.container}>

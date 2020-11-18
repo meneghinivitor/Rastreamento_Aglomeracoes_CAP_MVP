@@ -6,6 +6,7 @@ import Report from './report';
 import Protocol from './protocol';
 import Rastrear from './rastrear';
 import Foto from './foto';
+import Noticia from './noticia';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -13,15 +14,25 @@ export default class Main extends Component  {
   render() {
    return (
 <Tab.Navigator
-      initialRouteName="Protocol"
+      initialRouteName="Noticias"
       activeColor="#000"
       barStyle={{ backgroundColor: '#fff' }}
     >
       <Tab.Screen
+        name="Notícias"
+        component={Noticia}
+        options={{
+          tabBarLabel: 'Notícias',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="clipboard-text" black ={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Protocol"
         component={Protocol}
         options={{
-          tabBarLabel: 'Orientações',
+          tabBarLabel: 'Orientaçôes',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="alert-circle" black ={color} size={26} />
           ),
@@ -57,16 +68,7 @@ export default class Main extends Component  {
           ),
         }}
       />
-      <Tab.Screen
-        name="Rastrear"
-        component={Rastrear}
-        options={{
-          tabBarLabel: 'Rastrear',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="map-marker" black ={color} size={26} />
-          ),
-        }}
-      />
+      
     </Tab.Navigator>
    );
  } 

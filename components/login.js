@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ActivityIndicator, AsyncStorage } from 'react-native';
 import firebase from '../database/firebase';
+import * as GoogleSignIn from 'expo-google-sign-in'
 
 export default class Login extends Component {
   
@@ -9,10 +10,25 @@ export default class Login extends Component {
     this.state = { 
       email: '', 
       password: '', 
+      errorMessage: '',
       isLoading: false
     }
   }
-  
+  onLoginSuccess() {
+    this.props.navigation.navigate('Dashboard');
+  }
+  onLoginFailure(errorMessage) {
+    this.setState({ error: errorMessage, isLoading: false });
+  }
+  renderLoading() {
+    if (this.state.loading) {
+      return (
+        <View>
+          <ActivityIndicator size={'large'} />
+        </View>
+      );
+    }
+  }
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;

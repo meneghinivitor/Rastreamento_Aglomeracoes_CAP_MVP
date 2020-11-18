@@ -6,14 +6,47 @@ import { Notifications } from 'expo';
 console.disableYellowBox = true;
 
 export default class Report extends Component  {
-  constructor (props) {
+
+  constructor(props){
     super(props);
-    this.state = { 
+    this.state = {
       displayName: firebase.auth().currentUser.displayName,
-      text: '' }
+      ready: false,
+      where: {lat:null, lng:null},
+      error: null,
+      text: '' 
+    }
     var db = firebase.firestore();
     this.ref = db.collection('Reports').doc('Usuário: ' + this.state.displayName);
+ }
+ componentDidMount = async () => {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  if (existingStatus !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
   }
+
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  let token = await Notifications.getExpoPushTokenAsync();
+  console.log( token );
+  firebase.database().ref('Usuários/'+ this.state.displayName ).update({
+    token: token,
+  }, function(error) {
+    if (error) {
+      // The write failed...
+    } else {
+      // Data saved successfully!
+    }
+  });
+}
+
   
   buttonReport=()=>{
     var FieldValue = firebase.firestore.FieldValue;

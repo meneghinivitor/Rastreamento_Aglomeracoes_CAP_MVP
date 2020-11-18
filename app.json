@@ -2,18 +2,15 @@
   "name": "tccvitor",
   "displayName": "tccvitor",
   "expo": {
-    "android": {
-      "package": "com.mypackage.coolapp",
-      "googleServicesFile": "./google-services.json",
-      "useNextNotificationsApi": true
-    },
-    "ios": {
-      "bundleIdentifier": "com.mypackage.coolapp",
-      "googleServicesFile": "./GoogleService-Info.plist"
-    },
-    "name": "tccvitoratualizado",
-    "slug": "tccvitoratualizado",
+    "name": "Rastreamento Aglomerações CAP",
+    "slug": "rastreamento-aglomeracoes-cap",
     "version": "1.0.0",
+    "sdkVersion": "39.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "icon": "./src/img/icon.png",
     "splash": {
@@ -21,9 +18,21 @@
       "resizeMode": "cover",
       "backgroundcolor": "#000"
     },
+    "android": {
+      "package": "com.tccvitor",
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleSignIn": {
+          "apiKey" : "AIzaSyCZCXQ2nCMgDEEG0RAGGdo_ZEEP0J0YIX0",
+          "certificateHash": "5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25"
+        }
+      }
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "description": ""
+    "description": "TCC Vitor Meneghini - Rastreamento de Aglomerações CAP",
+    "githubUrl": "https://github.com/meneghinivitor/Rastreamento-Aglomeracoes-CAP"
+    
   }
 }
